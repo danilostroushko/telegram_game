@@ -31,9 +31,9 @@
         }
 
         createUnityInstance(document.querySelector("#unity-canvas"), {
-            dataUrl: "Build/server.data",
-            frameworkUrl: "Build/server.framework.js",
-        codeUrl: "Build/server.wasm",
+            dataUrl: "Build/server.data.unityweb",
+            frameworkUrl: "Build/server.framework.js.unityweb",
+        codeUrl: "Build/server.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
             companyName: "DefaultCompany",
             productName: "MetacorpUnity",
@@ -48,13 +48,21 @@
     </script>
 
     <script>
-    if(window.Telegram.WebApp){
+    if (window.Telegram.WebApp){
         window.Telegram.WebApp.onEvent('qrTextReceived',async (obj)=>{
             console.log('#qrTextReceived',obj)
-            if( window.unityInstance){
+            if (window.unityInstance){
                 window.unityInstance.SendMessage("TelegramController", "OnQrDetected", obj.data);
             }
-        })
+        });
+		
+		window.Telegram.WebApp.onEvent('viewportChanged',async (obj)=>{
+            console.log('#viewportChanged',obj)
+            if (window.unityInstance){
+				
+                window.unityInstance.SendMessage("TelegramController", "OnViewportChanged", window.Telegram.WebApp.isExpanded, window.Telegram.WebApp.viewportHeight, window.Telegram.WebApp.viewportStableHeight);
+            }
+        });
     }
     </script>
 </body>
