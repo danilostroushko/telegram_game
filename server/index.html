@@ -6,78 +6,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebGL Player | MetacorpUnity</title>
 
-    <script>
-
-        window.Telegram = {};
-        window.Telegram.WebApp = {
-            "initData": "",
-            initDataUnsafe: {
-                user: {
-                    id: 45645656489 + Math.floor(Math.random() * 1000),
-                    first_name: "FirstName" + Math.floor(Math.random() * 1000),
-                    last_name: "LastName" + Math.floor(Math.random() * 1000),
-                    username: "username" + Math.floor(Math.random() * 1000),
-                    language_code: "en",
-                    allows_write_to_pm: true
-                },
-                "chat_instance": "-345345345345",
-                "chat_type": "private",
-                "auth_date": "1796592165",
-                "hash": "fdg1fd53h1fg31h3g51h2g31j23fhg1j31g321s23j1gyjk"
-            },
-            "version": "6.9",
-            "platform": "web",
-            "colorScheme": "dark",
-            "themeParams": {
-                "bg_color": "#212121",
-                "button_color": "#8774e1",
-                "button_text_color": "#ffffff",
-                "hint_color": "#aaaaaa",
-                "link_color": "#8774e1",
-                "secondary_bg_color": "#181818",
-                "text_color": "#ffffff"
-            },
-            "isExpanded": true,
-            "viewportHeight": 639,
-            "viewportStableHeight": 639,
-            "isClosingConfirmationEnabled": false,
-            "headerColor": "#212121",
-            "backgroundColor": "#212121",
-            BackButton: {
-                "isVisible": false,
-                show:()=>{},
-                hide:()=>{},
-            },
-            MainButton: {
-                "text": "CONTINUE",
-                "color": "#8774e1",
-                "textColor": "#ffffff",
-                "isVisible": false,
-                "isProgressVisible": false,
-                "isActive": true,
-                show:()=>{},
-                hide:()=>{},
-                showProgress:()=>{},
-                hideProgress:()=>{}
-            },
-            "SettingsButton": {
-                "isVisible": false
-            },
-            HapticFeedback: {
-                notificationOccurred:(level)=>{}
-            },
-            "CloudStorage": {},
-            ready: () => { },
-            expand: () => { }
-        }
-    </script>
-<!-- <script src="https://telegram.org/js/telegram-web-app.js"></script> -->
+  
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 
 <body style="text-align: center; padding: 0; border: 0; margin: 0;">
     <canvas id="unity-canvas" tabindex="-1"
-        style="width: 960px; height: 600px; background: #231F20"></canvas>
-    <script src="Build/Build.loader.js"></script>
+        style="width: 100vw; height: 100vh; background: #231F20"></canvas>
+    <script src="Build/server.loader.js"></script>
     <script>
         if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
             // Mobile device style: fill the whole browser client area with the game canvas:
@@ -95,9 +31,9 @@
         }
 
         createUnityInstance(document.querySelector("#unity-canvas"), {
-            dataUrl: "Build/Build.data",
-            frameworkUrl: "Build/Build.framework.js",
-        codeUrl: "Build/Build.wasm",
+            dataUrl: "Build/server.data",
+            frameworkUrl: "Build/server.framework.js",
+        codeUrl: "Build/server.wasm",
         streamingAssetsUrl: "StreamingAssets",
             companyName: "DefaultCompany",
             productName: "MetacorpUnity",
@@ -112,10 +48,14 @@
     </script>
 
     <script>
-        // const interval = setInterval(function () {
-        //     window.unityInstance.SendMessage("TelegramController", "SetWebAppUser", JSON.stringify(window.Telegram.WebApp.initDataUnsafe.user));
-
-        // }, 5000);
+    if(window.Telegram.WebApp){
+        window.Telegram.WebApp.onEvent('qrTextReceived',async (obj)=>{
+            console.log('#qrTextReceived',obj)
+            if( window.unityInstance){
+                window.unityInstance.SendMessage("TelegramController", "OnQrDetected", obj.data);
+            }
+        })
+    }
     </script>
 </body>
 
