@@ -30,7 +30,7 @@
 				streamingAssetsUrl: "StreamingAssets",
 					companyName: "DefaultCompany",
 					productName: "MetacorpUnity",
-					productVersion: "1.0"
+					productVersion: "1.0.1"
 			};
 				  
 			if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) 
@@ -59,6 +59,7 @@
 					loadingBar.style.display = "none";
 					
 			        console.log('Instance created',window.Telegram.WebApp);
+			        console.log('initDataUnsafe', JSON.stringify(window.Telegram.WebApp.initDataUnsafe.user));
 			        window.unityInstance = unityInstance;
 			        window.unityInstance.SendMessage("TelegramController", "SetWebAppUser", JSON.stringify(window.Telegram.WebApp.initDataUnsafe.user));
 			        });
