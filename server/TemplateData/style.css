@@ -10,10 +10,10 @@ body { padding: 0; margin: 0; background: black; }
 #unity-canvas { 
 	background: black;
 	height: auto;
-	aspect-ratio: 13 / 6;
-	width: min(100%, 100vh * 13 / 6);
-    max-width: 2340px;
-    max-height: 1080px;
+	aspect-ratio: 9 / 16;
+	width: min(100%, 100vh * 9 / 16);
+    max-width: 1080px;
+    max-height: 1920px;
     margin: auto auto auto auto;
     display: block;
 }
