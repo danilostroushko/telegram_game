@@ -5,6 +5,7 @@ const path = require('path');
 const process = require('process');
 const ngrok = require("@ngrok/ngrok");
 const bodyParser = require('body-parser');
+const cors = require('cors');
 require('dotenv').config()
 
 const HOOK_PATH = process.env.HOOK_PATH || "hook";
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, '/'), {
     }
 }));
 
+app.use(cors({ origin: true, credentials: true }));
 
 app.use((req, res, next) => {
     const secret = req.get('X-Telegram-Bot-Api-Secret-Token');
