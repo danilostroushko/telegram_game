@@ -32,8 +32,8 @@ app.use(express.static(path.join(__dirname, '/'), {
     }
 }));
 
-app.use(cors({ origin: "*", credentials: true }));
-app.options('' * ", cors());
+app.use(cors({ origin: '*', credentials: true }));
+app.options('*', cors());
 
 app.use((req, res, next) => {
     const secret = req.get('X-Telegram-Bot-Api-Secret-Token');
