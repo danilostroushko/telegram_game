@@ -59,10 +59,10 @@
 					loadingBar.style.display = "none";
 					
 			        console.log('Instance created', window.Telegram.WebApp);
-			        console.log('initData', JSON.stringify(window.Telegram.WebApp.initData));
-			        console.log('initDataUnsafe', JSON.stringify(window.Telegram.WebApp.initDataUnsafe));
+			        //console.log('initData', JSON.stringify(window.Telegram.WebApp.initData));
+			        //console.log('initDataUnsafe', JSON.stringify(window.Telegram.WebApp.initDataUnsafe));
 			        window.unityInstance = unityInstance;
-			        window.unityInstance.SendMessage("TelegramController", "SetWebAppUser", JSON.stringify(window.Telegram.WebApp.initData));
+			        window.unityInstance.SendMessage("TelegramController", "SetWebAppUser", JSON.stringify(window.Telegram.WebApp.initDataUnsafe));
 			        });
 		</script>
 	</body>
