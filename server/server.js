@@ -39,7 +39,7 @@ app.use((req, res, next) => {
     const secret = req.get('X-Telegram-Bot-Api-Secret-Token');
 
     if (process.env.SECRET_TOKEN !== secret) {
-        //return res.sendStatus(301);
+        return res.sendStatus(301);
     }
 
 	res.header("Access-Control-Allow-Origin", "*");
