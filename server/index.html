@@ -16,7 +16,6 @@
 				<div id="unity-progress-bar-full"></div>
 			</div>
 		</div>
-		
 		<script src="Build/server.loader.js"></script>
 		<script>
 			var loadingBar = document.querySelector("#unity-loading-bar");
@@ -30,7 +29,7 @@
 				streamingAssetsUrl: "StreamingAssets",
 					companyName: "DefaultCompany",
 					productName: "MetacorpUnity",
-					productVersion: "1.0.1"
+					productVersion: "1.0.2"
 			};
 				  
 			if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) 
@@ -58,8 +57,7 @@
 				).then((unityInstance) => {
 					loadingBar.style.display = "none";
 					
-			        console.log('Instance created', window.Telegram.WebApp);
-			        //console.log('initData', JSON.stringify(window.Telegram.WebApp.initData));
+			        //console.log('Instance created',window.Telegram.WebApp);
 			        //console.log('initDataUnsafe', JSON.stringify(window.Telegram.WebApp.initDataUnsafe));
 			        window.unityInstance = unityInstance;
 			        window.unityInstance.SendMessage("TelegramController", "SetWebAppUser", JSON.stringify(window.Telegram.WebApp.initDataUnsafe));
